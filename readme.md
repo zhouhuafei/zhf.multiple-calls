@@ -1,5 +1,4 @@
 # 至少调用多次才会触发函数
-* 案例
 ```
 const multipleCalls = require('zhf.multiple-calls');
 let isTrigger = false;
