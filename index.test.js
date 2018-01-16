@@ -1,7 +1,8 @@
-const fn = require('./index');
-test('至少调用多次才会触发函数', () => {
+const multipleCalls = require('./index');
+test(
+    `
     let isTrigger = false;
-    const mulCalls = fn(3, function (error, result) {
+    const mulCalls = multipleCalls(3, function (error, result) {
         if (error) {
             console.log('error', error);
             console.log('result', result);
@@ -10,8 +11,24 @@ test('至少调用多次才会触发函数', () => {
             console.log('result', result);
         }
     });
-    mulCalls();
-    mulCalls();
-    mulCalls();
-    expect(isTrigger).toBe(true);
-});
+    mulCalls(); // isTrigger is false
+    mulCalls(); // isTrigger is false
+    mulCalls(); // isTrigger is true
+    `,
+    () => {
+        let isTrigger = false;
+        const mulCalls = multipleCalls(3, function (error, result) {
+            if (error) {
+                console.log('error', error);
+                console.log('result', result);
+            } else {
+                isTrigger = true;
+                console.log('result', result);
+            }
+        });
+        mulCalls(); // isTrigger is false
+        mulCalls(); // isTrigger is false
+        mulCalls(); // isTrigger is true
+        expect(isTrigger).toBe(true);
+    }
+);
