@@ -1,7 +1,7 @@
 # sku
 * 使用 npm  下载包
 ```
-npm i --save-dev zhf.multiple-calls
+npm i --save zhf.multiple-calls
 ```
 
 * 案例
