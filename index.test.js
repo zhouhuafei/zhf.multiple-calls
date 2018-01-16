@@ -1,4 +1,5 @@
 const multipleCalls = require('./index');
+
 test(
     `
     let isTrigger = false;
