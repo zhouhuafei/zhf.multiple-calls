@@ -11,7 +11,7 @@ function multipleCalls(num, fn) {
     if (isNaN(Number(num)) || Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
         num = 0;
         error = {
-            message: '参数错误'
+            message: '参数错误',
         };
     }
     if (num <= 0) {

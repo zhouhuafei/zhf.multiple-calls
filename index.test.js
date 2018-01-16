@@ -15,4 +15,3 @@ test('至少调用多次才会触发函数', () => {
     mulCalls();
     expect(isTrigger).toBe(true);
 });
-
