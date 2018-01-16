@@ -1,9 +1,4 @@
-# sku
-* 使用 npm  下载包
-```
-npm i --save zhf.multiple-calls
-```
-
+# 至少调用多次才会触发函数
 * 案例
 ```
 const multipleCalls = require('zhf.multiple-calls');
