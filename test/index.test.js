@@ -1,4 +1,4 @@
-const multipleCalls = require('./index');
+const multipleCalls = require('../dist/index.min');
 
 test(
     `
