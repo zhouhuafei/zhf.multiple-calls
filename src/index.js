@@ -6,6 +6,7 @@
 function multipleCalls(num, fn) {
     const result = {
         initNum: num,
+        data: {},
     };
     let error = null;
     if (isNaN(Number(num)) || Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
@@ -17,8 +18,11 @@ function multipleCalls(num, fn) {
     if (num <= 0) {
         fn(error, result);
     }
-    return function () {
+    return function (k, v) {
         num--;
+        if (k) {
+            result.data[k] = v;
+        }
         if (num <= 0) {
             fn(error, result);
         }
