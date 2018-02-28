@@ -1,34 +1,52 @@
 'use strict';
 
-/**
- * @description 至少调用num次才会触发函数的执行
- * @param {Number} num - 数字
- * @param {Function} fn - 函数
- * */
-function multipleCalls(num, fn) {
-    var result = {
-        initNum: num,
-        data: {}
-    };
-    var error = null;
-    if (isNaN(Number(num)) || Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
-        num = 0;
-        error = {
-            message: '参数错误'
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+(function (name, factory) {
+    if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined') {
+        // nodejs - commonjs canon
+        module.exports = factory();
+    } else if (typeof define === 'function' && define.amd) {
+        // requirejs - amd canon
+        define(factory);
+    } else {
+        // window - browser canon
+        if (Object.prototype.toString.call(window.zhf).slice(8, -1).toLowerCase() !== 'object') {
+            window.zhf = {};
+        }
+        window.zhf[name] = factory();
+    }
+})('multipleCalls', function () {
+    /**
+     * @description 至少调用num次才会触发函数的执行
+     * @param {Number} num - 数字
+     * @param {Function} fn - 函数
+     * */
+    function multipleCalls(num, fn) {
+        var result = {
+            initNum: num,
+            data: {}
         };
-    }
-    if (num <= 0) {
-        fn(error, result);
-    }
-    return function (k, v) {
-        num--;
-        if (k) {
-            result.data[k] = v;
+        var error = null;
+        if (isNaN(Number(num)) || Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
+            num = 0;
+            error = {
+                message: '参数错误'
+            };
         }
         if (num <= 0) {
             fn(error, result);
         }
-    };
-}
+        return function (k, v) {
+            num--;
+            if (k) {
+                result.data[k] = v;
+            }
+            if (num <= 0) {
+                fn(error, result);
+            }
+        };
+    }
 
-module.exports = multipleCalls;
+    return multipleCalls;
+});
