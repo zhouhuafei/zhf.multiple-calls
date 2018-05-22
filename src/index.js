@@ -15,28 +15,24 @@
      * @param {Number} num - 数字
      * @param {Function} fn - 函数
      * */
-    function multipleCalls(num, fn) {
+    function multipleCalls(num = 1, fn = function () {}) {
+        if (isNaN(Number(num)) || num <= 1) {
+            num = 1;
+        }
+        if (Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
+            fn = function () {};
+        }
         const result = {
             initNum: num,
             data: {},
         };
-        let error = null;
-        if (isNaN(Number(num)) || Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
-            num = 0;
-            error = {
-                message: '参数错误',
-            };
-        }
-        if (num <= 0) {
-            fn(error, result);
-        }
         return function (k, v) {
             num--;
             if (k) {
                 result.data[k] = v;
             }
             if (num <= 0) {
-                fn(error, result);
+                fn(result);
             }
         };
     }
