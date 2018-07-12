@@ -32,14 +32,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         if (Object.prototype.toString.call(fn).slice(8, -1).toLowerCase() !== 'function') {
             fn = function fn() {};
         }
-        var result = {
-            initNum: num,
-            data: {}
-        };
+        var result = {};
         return function (k, v) {
             num--;
             if (k) {
-                result.data[k] = v;
+                result[k] = v;
             }
             if (num <= 0) {
                 fn(result);
